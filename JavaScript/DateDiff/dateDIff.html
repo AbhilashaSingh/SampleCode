@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Date Difference</title>
+	<meta charset="UTF-8">
+	<link href="calendarview.css" rel="stylesheet" type="text/css">
+	</head>
+<body background="test4_lite.jpg">
+	<script type="text/javascript" src="prototype.js"></script>
+    <script type="text/javascript" src="calendarview.js"></script>
+	<script>
+
+	function functionDateDiff()
+	{
+		var dateGot=document.getElementById('date').innerHTML;
+		//alert(dateGot);
+		if("" == document.getElementById('date').innerHTML)
+		{
+			alert("Please select a date !");
+			return false;
+		}
+		else
+		{
+			var d1 = new Date(dateGot);
+			var d2 = new Date();
+ 			document.getElementById('dateField').innerHTML=d2;
+ 			var diffDate={
+       					 inDays: function(d1, d2) {
+       				   			 var t2 = d2.getTime();
+        						 var t1 = d1.getTime();
+        						 if(d1 < d2)
+        						 {
+        							 return parseInt((t2-t1)/(24*3600*1000)+.5);
+        						 }
+        						 else
+        						 {
+        							return parseInt((t2-t1)/(24*3600*1000));	 
+        						 }
+    						}			
+    						
+						}
+						var diffGot = diffDate.inDays(d1,d2);
+						document.getElementById('daysDiff').innerHTML=diffGot;
+						return diffGot;
+		
+		}
+	}
+	
+	
+	window.onload = function() {
+        Calendar.setup({
+          dateField     : 'date',
+          parentElement : 'calendar'
+        })
+      }
+	    
+	</script>
+	
+	<div>
+	
+	
+	
+	<div id="calendar"></div><br/>
+	
+	<div>Selected Date : </div><br/>
+	<div id="date"></div><br/>
+	
+    <div>Current Date : </div><br/>
+	<div id="dateField"></div><br/>
+	
+	<div>Days Difference : </div><br/>
+	<div id="daysDiff"></div><br/>
+	
+	<input id="btnFind" type="button" value="Find Difference" onClick="return functionDateDiff();"/>
+	</div>
+</body>
+</html>
